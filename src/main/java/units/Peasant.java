@@ -1,5 +1,7 @@
 package units;
 
+import java.util.Random;
+
 public class Peasant extends BaseClass{
     public Peasant(){
         super();
@@ -16,4 +18,16 @@ public class Peasant extends BaseClass{
     }
 
 
+    @Override
+    public void step() {
+
+    }
+
+    @Override
+    public void useAccessory(BaseClass target) {
+        int effect = new Random().nextInt(2,4);
+        System.out.println(this.name + " использует " + this.accessory
+                + " и увеличивает своё здоровье на "+effect);
+        this.health = this.health+effect;
+    }
 }

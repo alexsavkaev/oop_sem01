@@ -1,12 +1,25 @@
 package units;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 public class Monk extends BaseClass{
     int statsMultiplier;
     int dodgeMultiplier;
+
     @Override
-    public void UseAccessory(BaseClass target){
+    public void step() {
+
+    }
+
+    @Override
+    public void attack(@NotNull BaseClass target) {
+
+    }
+
+    @Override
+    public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory +
                 " и увеличивает свои характеристики на " + statsMultiplier);
         this.armor = this.armor+statsMultiplier;
@@ -15,7 +28,7 @@ public class Monk extends BaseClass{
         this.health = this.health+statsMultiplier;
     }
     @Override
-    public int Dodge(){
+    public int dodge(){
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
         if (chance > 90) {
             this.health=this.health+2;

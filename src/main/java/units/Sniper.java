@@ -6,13 +6,16 @@ public class Sniper extends BaseClass{
     private final int dodgeMultiplier;
     boolean visible;
     @Override
-    public int Dodge(){
+    public int dodge(){
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
         if (chance > 75) return this.agility;
         else return 0;
     }
     @Override
-    public void UseAccessory(BaseClass target){
+    public void step() {
+    }
+    @Override
+    public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory
                 + "и исчезает с поля зрения всех врагов");
         visible = false;
@@ -30,7 +33,7 @@ public class Sniper extends BaseClass{
         this.visible = true;
         this.dodgeMultiplier = 3;
     }
-    public Sniper(String name){
+    public Sniper(String name) {
         this();
         this.name = name;
     }

@@ -1,10 +1,7 @@
 package units;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
-
-public abstract class BaseClass {
+public abstract class BaseClass implements InGameInterface{
     protected String name;
     protected String weapon;
     protected String type;
@@ -18,9 +15,8 @@ public abstract class BaseClass {
     protected int armorPenetration;
     protected String accessory;
     protected boolean state;
-    public void Attack(@NotNull BaseClass target){
-
-        int damage = ((this.damage-target.armor/2)+target.Dodge());
+    public void attack(@NotNull BaseClass target){
+        int damage = ((this.damage-target.armor/2)+target.dodge());
         if (damage < 0) damage = 0;
         if (target.health-damage <= 0) {
             System.out.println(this.name+ " атакует " + target.name
@@ -31,35 +27,31 @@ public abstract class BaseClass {
         target.health = target.health-damage;
         if(target.health-damage <= 0) target.state = false;
     }
-    public int Dodge(){
+    public int dodge(){
         int chance = new Random().nextInt(0, 100);
         if (chance > 75) return agility;
         else return 0;
     }
-    public void UseAccessory(BaseClass target){
+    public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory);
     }
-public void getStats(){
-    System.out.println("Имя: "+ name + ", Здоровье: " + health+", Урон: "+ damage +", Броня: "+ armor);
-}
-    public void getAllStats() {
-        System.out.println("Имя: "+ name + ", Уровень: " + level +", Здоровье: " + health
-                +", Класс: "+ type +", Оружие: " +weapon+
-                ", Урон: "+ damage +", Ловкость: "+ agility +", Ресурс: " + resource
-                +", Дистанция: " + distance +", Броня: "+ armor
-                +", Пробивание брони: "+ armorPenetration + ", Аксессуар: " + accessory);
+    @Override
+    public String toString(){
+        return this.name;
+    }
+    public String getInfo(){
+        return  type;
     }
     public BaseClass(){
-        this("Безымянный", "Мужичок", "Энергия",0,
+        this( "Мужичок", "Энергия",0,
                 new Random().nextInt(6,8), new Random().nextInt(13,17),
                 new Random().nextInt(4,7), 5,
                 5, 0, "Пустой карман", true);
     }
-
-    private BaseClass(String name, String type, String resource, int level,
+    private BaseClass(String type, String resource, int level,
                       int damage, int health, int agility, int distance,
                       int armor, int armorPenetration, String accessory, boolean state) {
-        this.name = name;
+        this.name = String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
         this.type = type;
         this.resource = resource;
         this.level = level;

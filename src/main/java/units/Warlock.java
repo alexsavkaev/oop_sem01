@@ -7,8 +7,14 @@ import java.util.Random;
 public class Warlock extends BaseClass{
     int armorShred;
     int reduceDamage;
+
     @Override
-    public void Attack(@NotNull BaseClass target){
+    public void step() {
+
+    }
+
+    @Override
+    public void attack(@NotNull BaseClass target){
         int damage = this.damage;
         if (damage <0) damage = 0;
         System.out.println(this.name+ " атакует " +target.name + ", и наносит "
@@ -19,7 +25,7 @@ public class Warlock extends BaseClass{
         if (chance > 80) target.damage = target.damage-reduceDamage;
     }
     @Override
-    public void UseAccessory(BaseClass target){
+    public void useAccessory(BaseClass target){
         int soak = new Random().nextInt(0,4);
         System.out.println(this.name + " использует " + this.accessory+
                 " и высасывает у " + target.name + soak + " здоровья.");
