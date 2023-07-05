@@ -2,6 +2,7 @@ package units;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Warlock extends BaseClass{
@@ -9,10 +10,7 @@ public class Warlock extends BaseClass{
     int reduceDamage;
 
     @Override
-    public void step() {
-
-    }
-
+    public void step(ArrayList<BaseClass> team) {    }
     @Override
     public void attack(@NotNull BaseClass target){
         int damage = this.damage;
@@ -44,8 +42,8 @@ public class Warlock extends BaseClass{
         this.reduceDamage = 3;
         this.damage = 3;
     }
-    public Warlock(String name){
+    public Warlock(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 }

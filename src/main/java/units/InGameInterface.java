@@ -1,13 +1,10 @@
 package units;
-
-import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
 
 public interface InGameInterface {
-    void step();
+    void step(ArrayList<BaseClass> team);
     String getInfo();
-
-
-    void attack(@NotNull BaseClass target);
+    void attack(BaseClass target);
     void useAccessory(BaseClass target);
     int dodge();
 }

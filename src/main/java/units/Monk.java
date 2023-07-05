@@ -2,6 +2,7 @@ package units;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Monk extends BaseClass{
@@ -9,15 +10,11 @@ public class Monk extends BaseClass{
     int dodgeMultiplier;
 
     @Override
-    public void step() {
-
+    public void step(ArrayList<BaseClass> team) {
     }
-
     @Override
     public void attack(@NotNull BaseClass target) {
-
     }
-
     @Override
     public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory +
@@ -53,8 +50,8 @@ public class Monk extends BaseClass{
 
 
     }
-    public Monk(String name){
+    public Monk(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 }

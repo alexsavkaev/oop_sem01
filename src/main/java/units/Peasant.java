@@ -1,5 +1,6 @@
 package units;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Peasant extends BaseClass{
@@ -12,16 +13,14 @@ public class Peasant extends BaseClass{
         this.type = "Крестьянин";
         this.weapon = "Вилы";
     }
-    public Peasant(String name) {
+    public Peasant(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 
 
     @Override
-    public void step() {
-
-    }
+    public void step(ArrayList<BaseClass> team) {   }
 
     @Override
     public void useAccessory(BaseClass target) {

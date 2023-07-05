@@ -1,5 +1,6 @@
 package units;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Sniper extends BaseClass{
@@ -12,8 +13,7 @@ public class Sniper extends BaseClass{
         else return 0;
     }
     @Override
-    public void step() {
-    }
+    public void step(ArrayList<BaseClass> team) {   }
     @Override
     public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory
@@ -33,8 +33,8 @@ public class Sniper extends BaseClass{
         this.visible = true;
         this.dodgeMultiplier = 3;
     }
-    public Sniper(String name) {
+    public Sniper(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 }

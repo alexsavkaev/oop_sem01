@@ -2,6 +2,7 @@ package units;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Rogue extends BaseClass{
@@ -14,9 +15,7 @@ public class Rogue extends BaseClass{
     }
 
     @Override
-    public void step() {
-
-    }
+    public void step(ArrayList<BaseClass> team) {   }
 
     public void useAccessory(@NotNull BaseClass target){
         int damage = this.damage/2- target.dodge();
@@ -35,8 +34,8 @@ public class Rogue extends BaseClass{
         this.weapon = "Ножи";
         this.dodgeMultiplier = 3;
     }
-    public Rogue(String name){
+    public Rogue(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 }

@@ -1,10 +1,12 @@
 package units;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.Random;
 public class Spearman extends BaseClass{
     int armorPenetration;
     @Override
-    public void step() {}
+    public void step(ArrayList<BaseClass> team) {    }
     @Override
     public void attack(@NotNull BaseClass target){
         int damage = (this.damage+this.armorPenetration)-(target.armor/2+target.dodge());
@@ -32,8 +34,9 @@ public class Spearman extends BaseClass{
         this.weapon = "Копьё";
         this.armorPenetration = 2;
     }
-    public Spearman(String name) {
+    public Spearman(int x, int y) {
         this();
-        this.name = name;
+        this.location = new Location(x,y);
     }
 }
+
