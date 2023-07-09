@@ -26,6 +26,9 @@ fillTeams(teamBlue,9);
             person.lookAround(teamRed);
         }
     }
+    /**
+     * Выводит информацию о команде строкой типа: "Класс - [x:x y:y], "
+     */
     public static String teamInfo(ArrayList<BaseClass> team){
         StringBuilder info = new StringBuilder();
         for (BaseClass person: team) {
@@ -34,6 +37,12 @@ fillTeams(teamBlue,9);
         info.delete(info.length()-2,info.length()-1);
         return info.toString();
     }
+
+    /**
+     * Заполняет команду случайным классом
+     * @param team целевая команда
+     * @param xPos позиция, на которой появится персонаж
+     */
     public static void fillTeams(ArrayList<BaseClass> team, int xPos) {
         for (int i = 0; i < 10; i++) {
             int cnt = new Random().nextInt(1, 7);

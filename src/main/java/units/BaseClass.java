@@ -53,7 +53,7 @@ public abstract class BaseClass implements InGameInterface {
         return location;
     }
     /**
-     * Ищет ближайшего врага на поле боя
+     * Ищет ближайшего врага на поле боя, и выводит в консоль результат
      * @param team  целевая команда врагов
      */
     public void lookAround(ArrayList<BaseClass> team) {
@@ -86,6 +86,11 @@ public abstract class BaseClass implements InGameInterface {
         this.location = new Location(x, y);
     }
 
+    /**
+     * Находит ближайшего врага в целевой команде
+     * @param team целевая команда
+     * @return ближайший экземпляр класса BaseClass в целевой команде
+     */
     protected BaseClass findNearest(ArrayList<BaseClass> team) {
         BaseClass nearest = team.get(0);
         for (BaseClass character : team) {

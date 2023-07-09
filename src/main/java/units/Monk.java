@@ -50,6 +50,12 @@ public class Monk extends BaseClass{
 
 
     }
+
+    /**
+     * Создаёт монаха с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Monk(int x, int y) {
         this();
         this.location = new Location(x,y);

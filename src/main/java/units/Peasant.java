@@ -13,6 +13,11 @@ public class Peasant extends BaseClass{
         this.type = "Крестьянин";
         this.weapon = "Вилы";
     }
+    /**
+     * Создаёт крестьянина с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Peasant(int x, int y) {
         this();
         this.location = new Location(x,y);

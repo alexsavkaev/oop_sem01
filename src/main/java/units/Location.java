@@ -14,7 +14,13 @@ public class Location {
         this.x = x;
         this.y = y;
     }
+
+    /**
+     * Рассчитывает расстояние между двумя персонажами
+     * @param targetPosition координаты цели
+     * @return int расстояние
+     */
     public int getDistance(Location targetPosition) {
-        return (int) Math.sqrt(Math.pow(x - targetPosition.getPosition()[0], 2) + Math.pow(y - targetPosition.getPosition()[1], 2));
+        return (int) Math.sqrt(Math.pow(this.x - targetPosition.getPosition()[0], 2) + Math.pow(this.y - targetPosition.getPosition()[1], 2));
     }
 }

@@ -36,6 +36,12 @@ public class Crossbowman extends BaseClass {
             this.armorPenetration = 5;
 
         }
+
+    /**
+     * Создаёт арбалетчика с заданными координатами
+     * @param x x
+     * @param y y
+     */
     public Crossbowman( int x, int y){
             this();
             this.location = new Location(x, y);

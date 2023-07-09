@@ -34,6 +34,11 @@ public class Rogue extends BaseClass{
         this.weapon = "Ножи";
         this.dodgeMultiplier = 3;
     }
+    /**
+     * Создаёт бандита с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Rogue(int x, int y) {
         this();
         this.location = new Location(x,y);

@@ -33,6 +33,11 @@ public class Sniper extends BaseClass{
         this.visible = true;
         this.dodgeMultiplier = 3;
     }
+    /**
+     * Создаёт снайпера с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Sniper(int x, int y) {
         this();
         this.location = new Location(x,y);

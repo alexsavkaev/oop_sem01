@@ -34,6 +34,11 @@ public class Spearman extends BaseClass{
         this.weapon = "Копьё";
         this.armorPenetration = 2;
     }
+    /**
+     * Создаёт копейщика с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Spearman(int x, int y) {
         this();
         this.location = new Location(x,y);

@@ -30,6 +30,7 @@ public class Warlock extends BaseClass{
         target.health = target.health - soak;
         this.health = this.health + soak;
     }
+
     public Warlock(){
         super();
         this.accessory = "Жертвенная чаша";
@@ -42,6 +43,11 @@ public class Warlock extends BaseClass{
         this.reduceDamage = 3;
         this.damage = 3;
     }
+    /**
+     * Создаёт колдуна с заданными координатами:
+     * @param x x
+     * @param y y
+     */
     public Warlock(int x, int y) {
         this();
         this.location = new Location(x,y);
