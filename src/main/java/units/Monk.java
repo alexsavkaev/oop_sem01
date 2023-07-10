@@ -17,7 +17,8 @@ public class Monk extends Mage{
         this.agility = this.agility+statsMultiplier;
         this.attack[0] = super.attack[0]+statsMultiplier;
         this.attack[1] = super.attack[1]+statsMultiplier;
-        this.health = this.health+statsMultiplier;
+        this.currentHp = this.currentHp+statsMultiplier;
+        if(this.currentHp>this.health) this.currentHp=this.health;
     }
     @Override
     public boolean dodge(){

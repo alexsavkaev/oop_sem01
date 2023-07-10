@@ -33,6 +33,7 @@ public class Warlock extends Mage{
                 " и высасывает у " + target.name + soak + " здоровья.");
         target.currentHp -= soak;
         this.currentHp += soak;
+        if(this.currentHp>this.health) this.currentHp=this.health;
     }
 
     public Warlock(){
