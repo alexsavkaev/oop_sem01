@@ -8,7 +8,7 @@ public abstract class BaseClass implements InGameInterface {
     protected Location location;
     protected String weapon;
     protected String type;
-
+protected  int maxResource;
 
     protected int[] attack = new int[2];
     protected int health;
@@ -25,7 +25,7 @@ public abstract class BaseClass implements InGameInterface {
     protected boolean visible = true;
 
     public void attack(BaseClass target) {
-        if (!target.dodge()){
+        if (!target.dodge()&& this.inRange(target)){
             int damage = (this.getAverageDamage(this.attack) - target.armor/3);
             System.out.printf("%s атакует %s, и наносит %d урона.\n", this.name, target.name, damage);
             target.currentHp -= damage;
@@ -35,7 +35,9 @@ public abstract class BaseClass implements InGameInterface {
             System.out.printf("%s атакует %s, и промахивается.\n", this.name, target.name);
         }
     }
-
+public boolean inRange(BaseClass target){
+    return this.location.getDistance(target.location)<this.distance;
+}
     public boolean dodge() {
         int chance = new Random().nextInt(0, 100) + this.agility;
         return chance > 85;
@@ -75,11 +77,11 @@ public abstract class BaseClass implements InGameInterface {
     public BaseClass() {
         this("Мужичок", "Энергия", 10, 1,
                 5, new Random().nextInt(13, 17),
-                new Random().nextInt(2, 6), 5,
+                new Random().nextInt(2, 5), 5,
                 5, 0, "Пустой карман", true, 1, 1);
     }
 
-    private BaseClass(String type, String resource, int currentResource,
+    private BaseClass(String type, String resource, int maxResource,
                       int minAttack, int maxAttack, int health, int agility, int distance,
                       int armor, int armorPenetration, String accessory, boolean alive, int x, int y) {
         this.alive = alive;
@@ -87,7 +89,8 @@ public abstract class BaseClass implements InGameInterface {
         this.type = type;
         this.currentHp = health;
         this.resource = resource;
-        this.currentResource = currentResource;
+        this.currentResource = maxResource;
+        this.maxResource = maxResource;
         this.attack[0] = minAttack;
         this.attack[1] = maxAttack;
         this.health = health;
@@ -126,6 +129,9 @@ public abstract class BaseClass implements InGameInterface {
             }
         }
         return nearest;
+    }
+    public boolean isCritical(){
+        return this.agility + new Random().nextInt(1,5) > 10;
     }
 
     public int getInitiative() {

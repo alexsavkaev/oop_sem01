@@ -2,7 +2,7 @@ package units;
 
 import java.util.ArrayList;
 import java.util.Random;
-public class Spearman extends BaseClass{
+public class Spearman extends Melee{
     int armorPenetration;
     @Override
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {    }
@@ -15,15 +15,11 @@ public class Spearman extends BaseClass{
     }
     public Spearman(){
         super();
-        this.armor = 15;
+        this.armor = super.armor + 5;
         this.accessory = "Баклер";
-        this.health = super.health+3;
-        this.attack[0] = super.attack[0]+3;
-        this.attack[1] = super.attack[1]+3;
         this.type = "Копейщик";
         this.weapon = "Копьё";
         this.armorPenetration = 2;
-        this.currentHp = this.health;
     }
     /**
      * Создаёт копейщика с заданными координатами:

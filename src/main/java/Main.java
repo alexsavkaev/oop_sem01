@@ -15,24 +15,24 @@ fillTeams(teamBlue,9);
 teams.addAll(teamRed);
 teams.addAll(teamBlue);
 sortTeam(teams);
-        System.out.println("Red team:\n"+teamRed);
-        System.out.println("---------");
-        System.out.println("Blue team:\n"+teamBlue);
-        System.out.println("---------");
-        System.out.println(teamInfo(teamRed));
-        System.out.println("---------");
-        System.out.println(teamInfo(teamBlue));
-        System.out.println("---------");
-        for (BaseClass person:teams) {
-            if(teamBlue.contains(person)){
+System.out.println("Red team:\n"+teamRed);
+System.out.println("---------");
+System.out.println("Blue team:\n"+teamBlue);
+System.out.println("---------");
+System.out.println(teamInfo(teamRed));
+System.out.println("---------");
+System.out.println(teamInfo(teamBlue));
+System.out.println("---------");
+for (BaseClass person:teams) {
+    if(teamBlue.contains(person)){
                 person.takeTurn(teamRed,teamBlue);
-            }
-            else person.takeTurn(teamBlue, teamRed);
+    }
+    else person.takeTurn(teamBlue, teamRed);
         }
     }
-    /**
-     * Выводит информацию о команде строкой типа: "Имя (Класс) - hp: current/max, init: init"
-     */
+/**
+ * Выводит информацию о команде строкой типа: "Имя (Класс) - hp: current/max, init: init"
+ */
     public static String teamInfo(ArrayList<BaseClass> team){
         StringBuilder info = new StringBuilder();
         for (BaseClass person: team) {

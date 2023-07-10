@@ -1,6 +1,6 @@
 package units;
 
 public enum Names {
-    Grurl, Sundun, Erzarn, Kim, Brenung, Ornegg, Oguch, Ogon, Zagde, Crorn,
-    Attern, Brest, Kradurn, Dramu, Amgith, Hehlzus, Roklo
-}
+    Adariel, Addie, Agatha, Aiden, Aidan, Aisha, Alanna, Alessa, Aliyah, Amanda, Amber, Amy, Anaya, Anika, Angel,
+    Anna, Ariel, Ashley, Athena, Ava, Bambi, Bailey, Bella, Bianca, Brandy,
+    }

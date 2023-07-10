@@ -3,7 +3,7 @@ package units;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Sniper extends BaseClass{
+public class Sniper extends Ranged {
     private final int dodgeMultiplier;
     @Override
     public boolean dodge(){
@@ -38,21 +38,15 @@ public class Sniper extends BaseClass{
                 + " и исчезает с поля зрения всех врагов");
         this.visible = false;
     }
+
     public Sniper(){
         super();
         this.accessory = "Камуфляж";
-        this.agility = super.agility+2;
-        this.health = super.health-2;
-        this.attack[0] = super.attack[0]+5;
-        this.attack[1] = super.attack[1]+5;
+        this.agility = super.agility+3;
         this.type = "Снайпер";
         this.weapon = "Длинный лук";
         this.resource = "Стрелы";
-        this.distance = 15;
         this.dodgeMultiplier = 2;
-        this.setInitiative(super.getInitiative() + 10);
-        this.currentResource = 5;
-        this.currentHp = this.health;
     }
     /**
      * Создаёт снайпера с заданными координатами:

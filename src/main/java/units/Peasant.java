@@ -3,14 +3,11 @@ package units;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Peasant extends BaseClass{
+public class Peasant extends Melee{
     public Peasant(){
         super();
         this.accessory = "Крынка молока";
         this.agility = super.agility-2;
-        this.health = super.health+5;
-        this.attack[0] = super.attack[0]-2;
-        this.attack[1] = super.attack[1]-2;
         this.type = "Крестьянин";
         this.weapon = "Вилы";
         this.setInitiative(super.getInitiative() -5);

@@ -1,19 +1,13 @@
 package units;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Monk extends BaseClass{
+public class Monk extends Mage{
     int statsMultiplier;
     int dodgeMultiplier;
 
     @Override
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
-    }
-    @Override
-    public void attack(@NotNull BaseClass target) {
     }
     @Override
     public void useAccessory(BaseClass target){
@@ -28,19 +22,16 @@ public class Monk extends BaseClass{
     @Override
     public boolean dodge(){
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
-        if (chance > 98) {
+        if (chance > 95) {
             this.health=this.health+2;
             return true;
         }
-        else return chance > 85 && chance < 94;
+        else return chance > 85 && chance < 95;
     }
     public Monk(){
         super();
         this.armor = 5;
         this.accessory = "Чётки";
-        this.health = super.health+5;
-        this.attack[0] = super.attack[0]+4;
-        this.attack[1] = super.attack[1]+4;
         this.agility = super.agility +4;
         this.type = "Монах";
         this.weapon = "Посох";

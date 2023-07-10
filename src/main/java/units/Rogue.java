@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Rogue extends BaseClass{
+public class Rogue extends Melee{
     private final int dodgeMultiplier;
     @Override
     public boolean dodge(){
@@ -24,12 +24,9 @@ public class Rogue extends BaseClass{
     }
     public Rogue(){
         super();
-        this.armor = 10;
         this.accessory = "Метательный нож";
         this.agility = super.agility+2;
-        this.health = super.health-2;
-        this.attack[0] = super.attack[0]+4;
-        this.attack[1] = super.attack[1]+4;
+        this.health = super.health-5;
         this.type = "Разбойник";
         this.weapon = "Ножи";
         this.dodgeMultiplier = 3;

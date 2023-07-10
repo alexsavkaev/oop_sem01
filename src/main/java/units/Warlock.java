@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Warlock extends BaseClass{
+public class Warlock extends Mage{
     int armorShred;
     int reduceDamage;
 
@@ -14,15 +14,16 @@ public class Warlock extends BaseClass{
     @Override
     public void attack(@NotNull BaseClass target){
         int damage = this.getAverageDamage(this.attack);
+        int chance = new Random().nextInt(0,100);
         if (damage <0) damage = 0;
         System.out.println(this.name+ " атакует " +target.name + ", и наносит "
-                + damage + " урона. И снижает броню "+target.name+ " на " + armorShred + " единиц.");
-        target.health = target.health-damage;
-        target.armor = target.armor-armorShred;
-        int chance = new Random().nextInt(0,100);
+                + damage + " урона. ");
+        target.currentHp -= damage;
         if (chance > 80) {
-            target.attack[0] = target.attack[0] - reduceDamage;
-            target.attack[1] = target.attack[1] - reduceDamage;
+            target.attack[0] -= reduceDamage;
+            target.attack[1] -= reduceDamage;
+            target.armor -= armorShred;
+            System.out.printf("И снижает броню на %d, а атаку на %d", armorShred, reduceDamage);
         }
     }
     @Override
@@ -30,8 +31,8 @@ public class Warlock extends BaseClass{
         int soak = new Random().nextInt(0,4);
         System.out.println(this.name + " использует " + this.accessory+
                 " и высасывает у " + target.name + soak + " здоровья.");
-        target.health = target.health - soak;
-        this.health = this.health + soak;
+        target.currentHp -= soak;
+        this.currentHp += soak;
     }
 
     public Warlock(){
@@ -41,12 +42,9 @@ public class Warlock extends BaseClass{
         this.type = "Колдун";
         this.weapon = "Гримуар";
         this.distance = 15;
-        this.resource = "Мана";
         this.armorShred = 3;
         this.reduceDamage = 3;
         this.setInitiative(super.getInitiative() -5);
-        this.attack[0] = super.attack[0]-3;
-        this.attack[1] = super.attack[1]-3;
         this.currentHp = this.health;
     }
     /**
