@@ -28,6 +28,7 @@ public class Sniper extends Ranged {
                 return;
             }
             this.attack(target);
+            if(this.visible) this.visible=false;
             if(!this.findPeasant(allyTeam)) this.currentResource -= 1;
         System.out.println(target.name +" "+target.currentHp +"/"+target.health);
         }
