@@ -8,33 +8,37 @@ public abstract class BaseClass implements InGameInterface {
     protected Location location;
     protected String weapon;
     protected String type;
-    protected int level;
-    protected int damage;
+
+
+    protected int[] attack = new int[2];
     protected int health;
+    protected int currentHp;
     protected int agility;
+    private int initiative;
     protected String resource;
+    protected int currentResource;
     protected int distance;
     protected int armor;
     protected int armorPenetration;
     protected String accessory;
-    protected boolean state;
+    protected boolean alive;
+    protected boolean visible = true;
 
     public void attack(BaseClass target) {
-        int damage = ((this.damage - (target.armor / 2)) + target.dodge());
-        if (damage < 0) damage = 0;
-        if (target.health - damage <= 0) {
-            System.out.println(this.name + " атакует " + target.name
-                    + ", и наносит " + damage + " урона. И убивает его.");
-        } else System.out.println(this.name + " атакует " + target.name
-                + ", и наносит " + damage + " урона.");
-        target.health = target.health - damage;
-        if (target.health - damage <= 0) target.state = false;
+        if (!target.dodge()){
+            int damage = (this.getAverageDamage(this.attack) - target.armor/3);
+            System.out.printf("%s атакует %s, и наносит %d урона.\n", this.name, target.name, damage);
+            target.currentHp -= damage;
+            if(target.currentHp<=0) target.alive = false;
+        }
+        else if(target.dodge()){
+            System.out.printf("%s атакует %s, и промахивается.\n", this.name, target.name);
+        }
     }
 
-    public int dodge() {
-        int chance = new Random().nextInt(0, 100);
-        if (chance > 75) return agility;
-        else return 0;
+    public boolean dodge() {
+        int chance = new Random().nextInt(0, 100) + this.agility;
+        return chance > 85;
     }
 
     public void useAccessory(BaseClass target) {
@@ -47,7 +51,7 @@ public abstract class BaseClass implements InGameInterface {
     }
 
     public String getInfo() {
-        return type + " - " + location.toString();
+        return name +" ("+type + ") - " + "hp: "+this.currentHp+"/"+this.health+", init: "+this.initiative;
     }
     public Location getCoordinates() {
         return location;
@@ -61,29 +65,50 @@ public abstract class BaseClass implements InGameInterface {
         System.out.printf("%s оглядывается и замечает %s на расстоянии %d\n",this.name, nearestFoe.toString(),
                 location.getDistance(nearestFoe.getCoordinates()));
     }
+    public boolean findPeasant(ArrayList<BaseClass> team) {
+        boolean result = true;
+        for (BaseClass person : team) {
+            result = person.type.equals("Крестьянин");
+        }
+        return result;
+    }
     public BaseClass() {
-        this("Мужичок", "Энергия", 0,
-                new Random().nextInt(6, 8), new Random().nextInt(13, 17),
-                new Random().nextInt(4, 7), 5,
+        this("Мужичок", "Энергия", 10, 1,
+                5, new Random().nextInt(13, 17),
+                new Random().nextInt(2, 6), 5,
                 5, 0, "Пустой карман", true, 1, 1);
     }
 
-    private BaseClass(String type, String resource, int level,
-                      int damage, int health, int agility, int distance,
-                      int armor, int armorPenetration, String accessory, boolean state, int x, int y) {
+    private BaseClass(String type, String resource, int currentResource,
+                      int minAttack, int maxAttack, int health, int agility, int distance,
+                      int armor, int armorPenetration, String accessory, boolean alive, int x, int y) {
+        this.alive = alive;
         this.name = String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
         this.type = type;
+        this.currentHp = health;
         this.resource = resource;
-        this.level = level;
-        this.damage = damage;
+        this.currentResource = currentResource;
+        this.attack[0] = minAttack;
+        this.attack[1] = maxAttack;
         this.health = health;
         this.agility = agility;
         this.distance = distance;
         this.armor = armor;
         this.armorPenetration = armorPenetration;
         this.accessory = accessory;
-        this.state = true;
         this.location = new Location(x, y);
+        this.initiative = new Random().nextInt(20, 50);
+    }
+
+
+    /**
+     *
+     * Вычисляет средний урон
+     * @param attack массив int с min и max атакой
+     * @return int средний урон
+     */
+    public int getAverageDamage(int[] attack){
+        return (attack[0]+attack[1])/2;
     }
 
     /**
@@ -93,14 +118,23 @@ public abstract class BaseClass implements InGameInterface {
      */
     protected BaseClass findNearest(ArrayList<BaseClass> team) {
         BaseClass nearest = team.get(0);
-        for (BaseClass character : team) {
-            if (location.getDistance(character.getCoordinates()) < location.getDistance(nearest.getCoordinates())) {
-                nearest = character;
+        for (BaseClass person : team) {
+            if(person.visible && person.alive) {
+                if (location.getDistance(person.getCoordinates()) < location.getDistance(nearest.getCoordinates())) {
+                    nearest = person;
+                }
             }
         }
         return nearest;
     }
 
+    public int getInitiative() {
+        return initiative;
+    }
+
+    public void setInitiative(int initiative) {
+        this.initiative = initiative;
+    }
 }
 
 

@@ -8,17 +8,16 @@ import java.util.Random;
 public class Rogue extends BaseClass{
     private final int dodgeMultiplier;
     @Override
-    public int dodge(){
+    public boolean dodge(){
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
-        if (chance > 75) return this.agility;
-        else return 0;
+        return chance > 75;
     }
 
     @Override
-    public void step(ArrayList<BaseClass> team) {   }
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam){   }
 
     public void useAccessory(@NotNull BaseClass target){
-        int damage = this.damage/2- target.dodge();
+        int damage = this.getAverageDamage(this.attack)/3;
         System.out.println(this.name + " бросает " + this.accessory + ", и наносит "
                 + target.name +" "+ damage + " урона.");
         target.health = target.health-damage;
@@ -29,10 +28,13 @@ public class Rogue extends BaseClass{
         this.accessory = "Метательный нож";
         this.agility = super.agility+2;
         this.health = super.health-2;
-        this.damage = super.damage+4;
+        this.attack[0] = super.attack[0]+4;
+        this.attack[1] = super.attack[1]+4;
         this.type = "Разбойник";
         this.weapon = "Ножи";
         this.dodgeMultiplier = 3;
+        this.setInitiative(super.getInitiative() + 5);
+        this.currentHp = this.health;
     }
     /**
      * Создаёт бандита с заданными координатами:

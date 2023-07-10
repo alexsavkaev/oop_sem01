@@ -5,33 +5,54 @@ import java.util.Random;
 
 public class Sniper extends BaseClass{
     private final int dodgeMultiplier;
-    boolean visible;
     @Override
-    public int dodge(){
+    public boolean dodge(){
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
-        if (chance > 75) return this.agility;
-        else return 0;
+        return chance > 80;
     }
+
+    /**
+     * Выполняет свой ход, если живой и есть стрелы. Находит ближайшего противника
+     * и использует аксессуар, если противник слишком близко, либо атакует противника.
+     * Ищет в своей команде Крестьянина и если не находит - тратит одну стрелу.
+     * @param enemyTeam Команда врага
+     * @param allyTeam Команда союзника
+     */
     @Override
-    public void step(ArrayList<BaseClass> team) {   }
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
+        if(!this.alive || this.currentResource <= 0) return;
+        this.lookAround(enemyTeam);
+        BaseClass target = this.findNearest(enemyTeam);
+            if (this.location.getDistance(target.location) < 3) {
+                this.useAccessory(this);
+                return;
+            }
+            this.attack(target);
+            if(!this.findPeasant(allyTeam)) this.currentResource -= 1;
+        System.out.println(target.name +" "+target.currentHp +"/"+target.health);
+        }
+
     @Override
     public void useAccessory(BaseClass target){
         System.out.println(this.name + " использует " + this.accessory
-                + "и исчезает с поля зрения всех врагов");
-        visible = false;
+                + " и исчезает с поля зрения всех врагов");
+        this.visible = false;
     }
     public Sniper(){
         super();
         this.accessory = "Камуфляж";
         this.agility = super.agility+2;
         this.health = super.health-2;
-        this.damage = super.damage+5;
+        this.attack[0] = super.attack[0]+5;
+        this.attack[1] = super.attack[1]+5;
         this.type = "Снайпер";
         this.weapon = "Длинный лук";
         this.resource = "Стрелы";
         this.distance = 15;
-        this.visible = true;
-        this.dodgeMultiplier = 3;
+        this.dodgeMultiplier = 2;
+        this.setInitiative(super.getInitiative() + 10);
+        this.currentResource = 5;
+        this.currentHp = this.health;
     }
     /**
      * Создаёт снайпера с заданными координатами:

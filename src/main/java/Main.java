@@ -1,5 +1,6 @@
 import units.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
@@ -8,36 +9,45 @@ public class Main {
     public static void main(String[] args) {
 ArrayList<BaseClass> teamRed = new ArrayList<>(10);
 ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
+ArrayList<BaseClass> teams = new ArrayList<>();
 fillTeams(teamRed,0);
 fillTeams(teamBlue,9);
-        System.out.println(teamRed);
+teams.addAll(teamRed);
+teams.addAll(teamBlue);
+sortTeam(teams);
+        System.out.println("Red team:\n"+teamRed);
         System.out.println("---------");
-        System.out.println(teamBlue);
+        System.out.println("Blue team:\n"+teamBlue);
         System.out.println("---------");
         System.out.println(teamInfo(teamRed));
         System.out.println("---------");
         System.out.println(teamInfo(teamBlue));
         System.out.println("---------");
-        for (BaseClass person: teamRed) {
-            person.lookAround(teamBlue);
-        }
-        System.out.println("---------");
-        for (BaseClass person: teamBlue) {
-            person.lookAround(teamRed);
+        for (BaseClass person:teams) {
+            if(teamBlue.contains(person)){
+                person.takeTurn(teamRed,teamBlue);
+            }
+            else person.takeTurn(teamBlue, teamRed);
         }
     }
     /**
-     * Выводит информацию о команде строкой типа: "Класс - [x:x y:y], "
+     * Выводит информацию о команде строкой типа: "Имя (Класс) - hp: current/max, init: init"
      */
     public static String teamInfo(ArrayList<BaseClass> team){
         StringBuilder info = new StringBuilder();
         for (BaseClass person: team) {
-            info.append(person.getInfo()).append(", ");
+            info.append(person.getInfo()).append("\n");
         }
-        info.delete(info.length()-2,info.length()-1);
         return info.toString();
     }
 
+    /**
+     * Сортирует команду по параметру initiative
+     * @param team целевая команда для сортировки ArrayList<BaseClass>
+     */
+    public static void sortTeam(ArrayList<BaseClass> team){
+        team.sort(Comparator.comparingInt(BaseClass::getInitiative));
+    }
     /**
      * Заполняет команду случайным классом
      * @param team целевая команда

@@ -9,9 +9,12 @@ public class Peasant extends BaseClass{
         this.accessory = "Крынка молока";
         this.agility = super.agility-2;
         this.health = super.health+5;
-        this.damage = super.damage-2;
+        this.attack[0] = super.attack[0]-2;
+        this.attack[1] = super.attack[1]-2;
         this.type = "Крестьянин";
         this.weapon = "Вилы";
+        this.setInitiative(super.getInitiative() -5);
+        this.currentHp = this.health;
     }
     /**
      * Создаёт крестьянина с заданными координатами:
@@ -25,7 +28,7 @@ public class Peasant extends BaseClass{
 
 
     @Override
-    public void step(ArrayList<BaseClass> team) {   }
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {   }
 
     @Override
     public void useAccessory(BaseClass target) {
