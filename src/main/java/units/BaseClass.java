@@ -68,9 +68,12 @@ public boolean inRange(BaseClass target){
                 location.getDistance(nearestFoe.getCoordinates()));
     }
     public boolean findPeasant(ArrayList<BaseClass> team) {
-        boolean result = true;
+        boolean result = false;
         for (BaseClass person : team) {
-            result = person.type.equals("Крестьянин");
+            if (person.type.equals("Крестьянин")) {
+                result = true;
+                break;
+            }
         }
         return result;
     }

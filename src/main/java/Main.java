@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 ArrayList<BaseClass> teamRed = new ArrayList<>(10);
 ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
-ArrayList<BaseClass> teams = new ArrayList<>();
+ArrayList<BaseClass> teams = new ArrayList<>(20);
 fillTeams(teamRed,0);
 fillTeams(teamBlue,9);
 teams.addAll(teamRed);
@@ -53,7 +53,7 @@ for (BaseClass person:teams) {
      */
     public static void fillTeams(ArrayList<BaseClass> team, int xPos) {
         for (int i = 0; i < 10; i++) {
-            int cnt = new Random().nextInt(1, 7);
+            int cnt = new Random().nextInt(1, 8);
             int pos = new Random().nextInt(0,2); // Небольшой элемент рандома при позиционировании
             if(xPos>5) pos *= -1;                            // Чтобы вторая команда не появлялась за полем 10*10
             switch (cnt) {

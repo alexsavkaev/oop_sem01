@@ -32,7 +32,7 @@ public abstract class Ranged extends BaseClass{
         this.attack[1] = super.attack[1] + 5;
         this.distance = 8;
         this.setInitiative(super.getInitiative() + 10);
-        this.currentResource = 5;
+        this.currentResource = this.maxResource = 5;
     }
 
 }
