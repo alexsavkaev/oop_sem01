@@ -7,17 +7,21 @@ public abstract class Ranged extends BaseClass{
             int damage = (this.getAverageDamage(this.attack) - target.armor/3);
             if(this.isCritical()) {
                 damage *= 1.15;
-                System.out.printf("%s атакует %s, и наносит %d критического урона.\n", this.name, target.name, damage);
+                System.out.printf("%s атакует %s, и наносит %d критического урона.\n",
+                        this.name, target.name, damage);
                 target.currentHp -= damage;
             }else{
-                System.out.printf("%s атакует %s, и наносит %d урона.\n", this.name, target.name, damage);
+                System.out.printf("%s атакует %s, и наносит %d урона.\n",
+                        this.name, target.name, damage);
                 target.currentHp -= damage;
             }
             if(target.currentHp<=0) target.alive = false;
         }
         else if(target.dodge()){
-            System.out.printf("%s атакует %s, и промахивается.\n", this.name, target.name);
-        }else if(!this.inRange(target)) System.out.printf("%s слишком далеко, %s хочет подойти ближе, но пока не умеет\n",
+            System.out.printf("%s атакует %s, и промахивается.\n",
+                    this.name, target.name);
+        }else if(!this.inRange(target)) System.out.printf("%s слишком далеко," +
+                        " %s хочет подойти ближе, но пока не умеет\n",
                 target.name, this.name);
     }
     public Ranged() {

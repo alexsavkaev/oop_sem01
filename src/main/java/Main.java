@@ -4,8 +4,6 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
-
-
     public static void main(String[] args) {
 ArrayList<BaseClass> teamRed = new ArrayList<>(10);
 ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
