@@ -4,29 +4,25 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
+    public static ArrayList<BaseClass> teamRed = new ArrayList<>(10);
+    public static ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
+    public static ArrayList<BaseClass> teams = new ArrayList<>(20);
     public static void main(String[] args) {
-ArrayList<BaseClass> teamRed = new ArrayList<>(10);
-ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
-ArrayList<BaseClass> teams = new ArrayList<>(20);
-fillTeams(teamRed,0);
-fillTeams(teamBlue,9);
+
+
+
+fillTeams(teamRed,1);
+fillTeams(teamBlue,10);
 teams.addAll(teamRed);
 teams.addAll(teamBlue);
 sortTeam(teams);
-System.out.println("Red team:\n"+teamRed);
-System.out.println("---------");
-System.out.println("Blue team:\n"+teamBlue);
-System.out.println("---------");
-System.out.println(teamInfo(teamRed));
-System.out.println("---------");
-System.out.println(teamInfo(teamBlue));
-System.out.println("---------");
-for (BaseClass person:teams) {
-    if(teamBlue.contains(person)){
-                person.takeTurn(teamRed,teamBlue);
-    }
-    else person.takeTurn(teamBlue, teamRed);
-        }
+//for (BaseClass person:teams) {
+//    if(teamBlue.contains(person)){
+//                person.takeTurn(teamRed,teamBlue);
+//    }
+//    else person.takeTurn(teamBlue, teamRed);
+//        }
+View.view();
     }
 /**
  * Выводит информацию о команде строкой типа: "Имя (Класс) - hp: current/max, init: init"
@@ -52,8 +48,8 @@ for (BaseClass person:teams) {
      * @param xPos позиция, на которой появится персонаж
      */
     public static void fillTeams(ArrayList<BaseClass> team, int xPos) {
-        for (int i = 0; i < 10; i++) {
-            int cnt = new Random().nextInt(1, 8);
+        for (int i = 1; i < 11; i++) {
+            int cnt = new Random().nextInt(1, 9);
             int pos = new Random().nextInt(0,2); // Небольшой элемент рандома при позиционировании
             if(xPos>5) pos *= -1;                            // Чтобы вторая команда не появлялась за полем 10*10
             switch (cnt) {
@@ -64,6 +60,7 @@ for (BaseClass person:teams) {
                 case 5 -> team.add(new Warlock(xPos+pos,i));
                 case 6 -> team.add(new Spearman(xPos+pos,i));
                 case 7 -> team.add(new Peasant(xPos+pos,i));
+                case 8 -> team.add(new Cliric(xPos+pos,i));
             }
         }
     }
