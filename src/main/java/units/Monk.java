@@ -2,7 +2,7 @@ package units;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Monk extends Mage{
+public class Monk extends Melee{
     int statsMultiplier;
     int dodgeMultiplier;
 
@@ -36,9 +36,9 @@ public class Monk extends Mage{
         this.agility = super.agility +4;
         this.type = "Монах";
         this.weapon = "Посох";
-        this.statsMultiplier = 3;
-        this.dodgeMultiplier = 3;
-        this.setInitiative(super.getInitiative() +5);
+        this.statsMultiplier = 2;
+        this.dodgeMultiplier = 2;
+        this.setInitiative(super.getInitiative() -5);
         this.currentHp = this.health;
     }
 

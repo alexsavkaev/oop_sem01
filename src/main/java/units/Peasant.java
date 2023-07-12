@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Peasant extends Melee{
+
     public Peasant(){
         super();
         this.accessory = "Крынка молока";
         this.agility = super.agility-2;
-        this.type = "Крестьянин";
+        this.type = "Холоп";
         this.weapon = "Вилы";
-        this.setInitiative(super.getInitiative() -5);
+        this.setInitiative(super.getInitiative() +10);
         this.currentHp = this.health;
     }
     /**
@@ -25,7 +26,9 @@ public class Peasant extends Melee{
 
 
     @Override
-    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {   }
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
+        if(!this.free) this.free = true;
+    }
 
     @Override
     public void useAccessory(BaseClass target) {

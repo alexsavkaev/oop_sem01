@@ -30,7 +30,7 @@ public class Rogue extends Melee{
         this.type = "Разбойник";
         this.weapon = "Ножи";
         this.dodgeMultiplier = 3;
-        this.setInitiative(super.getInitiative() + 5);
+        this.setInitiative(super.getInitiative() - 15);
         this.currentHp = this.health;
     }
     /**

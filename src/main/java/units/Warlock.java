@@ -40,12 +40,12 @@ public class Warlock extends Mage{
         super();
         this.accessory = "Жертвенная чаша";
         this.health = super.health-2;
-        this.type = "Колдун";
+        this.type = "Чародей";
         this.weapon = "Гримуар";
         this.distance = 15;
         this.armorShred = 3;
         this.reduceDamage = 3;
-        this.setInitiative(super.getInitiative() -5);
+        this.setInitiative(super.getInitiative() +10);
         this.currentHp = this.health;
     }
     /**
