@@ -8,21 +8,19 @@ public class Main {
     public static ArrayList<BaseClass> teamBlue = new ArrayList<>(10);
     public static ArrayList<BaseClass> teams = new ArrayList<>(20);
     public static void main(String[] args) {
-
-
-
-fillTeams(teamRed,1);
-fillTeams(teamBlue,10);
-teams.addAll(teamRed);
-teams.addAll(teamBlue);
-sortTeam(teams);
-//for (BaseClass person:teams) {
-//    if(teamBlue.contains(person)){
-//                person.takeTurn(teamRed,teamBlue);
-//    }
-//    else person.takeTurn(teamBlue, teamRed);
-//        }
-View.view();
+        fillTeams(teamRed, 1);
+        fillTeams(teamBlue, 10);
+        teams.addAll(teamRed);
+        teams.addAll(teamBlue);
+        sortTeam(teams);
+        for (int i = 0; i < 10; i++) {
+            for (BaseClass person : teams) {
+                if (teamBlue.contains(person)) {
+                    person.takeTurn(teamRed, teamBlue);
+                } else person.takeTurn(teamBlue, teamRed);
+            }
+            View.view();
+        }
     }
 /**
  * Выводит информацию о команде строкой типа: "Имя (Класс) - hp: current/max, init: init"

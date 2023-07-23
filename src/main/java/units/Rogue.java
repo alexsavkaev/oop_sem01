@@ -1,8 +1,6 @@
 package units;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Rogue extends Melee{
@@ -14,8 +12,6 @@ public class Rogue extends Melee{
     }
 
     @Override
-    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam){   }
-
     public void useAccessory(@NotNull BaseClass target){
         int damage = this.getAverageDamage(this.attack)/3;
         System.out.println(this.name + " бросает " + this.accessory + ", и наносит "

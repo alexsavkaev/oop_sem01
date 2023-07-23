@@ -1,11 +1,8 @@
 package units;
-
-import java.util.ArrayList;
 import java.util.Random;
 public class Spearman extends Melee{
     int armorPenetration;
-    @Override
-    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {    }
+
     @Override
     public void useAccessory(BaseClass target){
         int effect = new Random().nextInt(2,4);

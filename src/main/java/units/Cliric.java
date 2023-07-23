@@ -12,8 +12,9 @@ public class Cliric extends Mage{
                     this.name, findNearest(allyTeam).name);
             return;
         }
-        target.currentHp += this.currentResource/2;
-        this.currentResource /= 2;
+        int heal = this.getAverageDamage(this.attack);
+        target.currentHp += heal;
+        this.currentResource -= heal;
         System.out.printf("%s исцеляет раны %s на %d\n", this.name, target.name, this.currentResource/2);
     }
 

@@ -1,6 +1,24 @@
 package units;
 
+import java.util.ArrayList;
+
 public abstract class Melee extends BaseClass{
+    @Override
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
+        if(!this.alive) return;
+        BaseClass target = this.findNearest(enemyTeam);
+        if(!this.isInRange(target)) {
+            Location setback = this.location;
+            this.location.moveTowards(target);
+            System.out.printf("%s движется в сторону %s.\n", this.name, target.name);
+            if(this.location.isTaken(allyTeam)) this.location = setback;
+        }
+        else {
+            this.attack(target);
+        }
+
+    }
+
     public Melee(){
         super();
         this.health = super.health+5;

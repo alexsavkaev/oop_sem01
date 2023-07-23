@@ -27,13 +27,12 @@ public class View {
             String out = "| ";
             for (BaseClass human: Main.teams) {
                 if (human.getCoords()[0] == x && human.getCoords()[1] == y){
-                    if (human.getHp() == 0) {
+                    if (Main.teamRed.contains(human)) out = "|" + (AnsiColors.ANSI_RED + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    if (Main.teamBlue.contains(human)) out = "|" + (AnsiColors.ANSI_BLUE + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    if (human.getHp() <= 0) {
                         out = "|" + (AnsiColors.ANSI_BLACK + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
                         break;
                     }
-                    if (Main.teamRed.contains(human)) out = "|" + (AnsiColors.ANSI_RED+ human.toString().charAt(0) + AnsiColors.ANSI_RESET);
-                    if (Main.teamBlue.contains(human)) out = "|" + (AnsiColors.ANSI_BLUE + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
-                    break;
                 }
             }
             return out;

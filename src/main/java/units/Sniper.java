@@ -11,9 +11,12 @@ public class Sniper extends Ranged {
     }
     @Override
     public void useAccessory(BaseClass target){
-        System.out.println(this.name + " использует " + this.accessory
-                + " и исчезает с поля зрения всех врагов");
-        this.visible = false;
+        if(!this.usedAccessory) {
+            System.out.println(this.name + " использует " + this.accessory
+                    + " и исчезает с поля зрения всех врагов");
+            this.visible = false;
+            this.usedAccessory = true;
+        }
     }
 
     public Sniper(){

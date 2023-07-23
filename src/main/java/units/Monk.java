@@ -1,24 +1,24 @@
 package units;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Monk extends Melee{
     int statsMultiplier;
     int dodgeMultiplier;
 
-    @Override
-    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
-    }
+
     @Override
     public void useAccessory(BaseClass target){
-        System.out.println(this.name + " использует " + this.accessory +
-                " и увеличивает свои характеристики на " + statsMultiplier);
-        this.armor = this.armor+statsMultiplier;
-        this.agility = this.agility+statsMultiplier;
-        this.attack[0] = super.attack[0]+statsMultiplier;
-        this.attack[1] = super.attack[1]+statsMultiplier;
-        this.currentHp = this.currentHp+statsMultiplier;
-        if(this.currentHp>this.health) this.currentHp=this.health;
+        if(!this.usedAccessory) {
+            System.out.println(this.name + " использует " + this.accessory +
+                    " и увеличивает свои характеристики на " + statsMultiplier);
+            this.armor = this.armor + statsMultiplier;
+            this.agility = this.agility + statsMultiplier;
+            this.attack[0] = super.attack[0] + statsMultiplier;
+            this.attack[1] = super.attack[1] + statsMultiplier;
+            this.currentHp = this.currentHp + statsMultiplier;
+            if (this.currentHp > this.health) this.currentHp = this.health;
+            this.usedAccessory = true;
+        }
     }
     @Override
     public boolean dodge(){

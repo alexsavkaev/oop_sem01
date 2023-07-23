@@ -1,6 +1,4 @@
 package units;
-
-
 import java.util.ArrayList;
 import java.util.Random;
 public abstract class BaseClass implements InGameInterface {
@@ -23,15 +21,18 @@ public abstract class BaseClass implements InGameInterface {
     protected String accessory;
     protected boolean alive;
     protected boolean visible = true;
+    protected boolean usedAccessory = false;
 
     public void attack(BaseClass target) {
         if (!target.dodge() && this.isInRange(target)) {
             int damage = (this.getAverageDamage(this.attack) - target.armor / 3);
-            System.out.printf("%s атакует %s, и наносит %d урона.\n", this.name, target.name, damage);
+            System.out.printf("%s(%s) атакует %s, и наносит %d урона.\n",
+                    this.name, this.type.charAt(0), target.name, damage);
             target.currentHp -= damage;
             if (target.currentHp <= 0) target.alive = false;
         } else if (target.dodge()) {
-            System.out.printf("%s атакует %s, и промахивается.\n", this.name, target.name);
+            System.out.printf("%s(%s) атакует %s, и промахивается.\n",
+                    this.name, this.type.charAt(0), target.name);
         }
     }
     public boolean isInRange(BaseClass target) {

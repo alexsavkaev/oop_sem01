@@ -13,24 +13,24 @@ public abstract class Ranged extends BaseClass{
     @Override
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
         if(!this.alive || this.currentResource <= 0) return;
-        this.lookAround(enemyTeam);
         BaseClass target = this.findNearest(enemyTeam);
         if (this.location.getDistance(target.location) < 3) {
             this.useAccessory(this);
             return;
         }
-        else if(!this.isInRange(target)) {
-            System.out.printf("%s слишком далеко," +
-                            "\n",
-                    target.name);
+        if(!this.isInRange(target)) {
+            this.location.moveTowards(target);
             return;
         }
-        this.attack(target);
+        if(this.isInRange(target)) {
+            this.attack(target);
+            System.out.println(target.name +" "+target.currentHp +"/"+target.health);
+            System.out.println(this.currentResource +"/"+ this.maxResource);
+        }
         if(this.visible) this.visible=false;
         if(!this.findPeasant(allyTeam)) this.currentResource -= 1;
 
-        System.out.println(target.name +" "+target.currentHp +"/"+target.health);
-        System.out.println(this.currentResource +"/"+ this.maxResource);
+
     }
     public boolean findPeasant(ArrayList<BaseClass> team) {
         boolean result = false;
@@ -45,23 +45,26 @@ public abstract class Ranged extends BaseClass{
     }
     @Override
     public void attack(BaseClass target) {
-        if (!target.dodge() || this.isInRange(target)){
+        if (!target.dodge() && this.isInRange(target)){
             int damage = (this.getAverageDamage(this.attack) - target.armor/3);
             if(this.isCritical()) {
                 damage *= 1.15;
-                System.out.printf("%s атакует %s, и наносит %d критического урона.\n",
-                        this.name, target.name, damage);
+                System.out.printf("%s(%s) атакует %s, и наносит %d критического урона.\n",
+                        this.name, this.type.charAt(0), target.name, damage);
                 target.currentHp -= damage;
             }else{
-                System.out.printf("%s атакует %s, и наносит %d урона.\n",
-                        this.name, target.name, damage);
+                System.out.printf("%s(%s) атакует %s, и наносит %d урона.\n",
+                        this.name, this.type.charAt(0), target.name, damage);
                 target.currentHp -= damage;
             }
-            if(target.currentHp<=0) target.alive = false;
         }
         else if(target.dodge()){
-            System.out.printf("%s атакует %s, и промахивается.\n",
-                    this.name, target.name);
+            System.out.printf("%s(%s) атакует %s, и промахивается.\n",
+                    this.name, this.type.charAt(0), target.name);
+        }
+        if(target.currentHp<=0) {
+            target.currentHp = 0;
+            target.alive = false;
         }
     }
     @Override

@@ -7,8 +7,11 @@ public class Crossbowman extends Ranged {
 
     @Override
     public void useAccessory (BaseClass target){
-        System.out.println(this.name + " достаёт щит " + this.accessory);
-        this.armor = this.armor + new Random().nextInt(3, 5);
+        if(!this.usedAccessory) {
+            System.out.println(this.name + " достаёт " + this.accessory);
+            this.armor = this.armor + new Random().nextInt(3, 5);
+            this.usedAccessory = true;
+        }
     }
     public Crossbowman() {
             super();
