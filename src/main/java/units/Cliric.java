@@ -5,6 +5,12 @@ import java.util.ArrayList;
 public class Cliric extends Mage{
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam){
         if(!this.alive || this.currentResource <= 0) return;
+        BaseClass dead = findDead(allyTeam);
+        if (dead != null && !this.usedAccessory){
+            useAccessory(dead);
+            this.usedAccessory = true;
+            return;
+        }
         BaseClass target = this.findNearestWounded(allyTeam);
         if(target.currentHp == target.health) {
             findNearest(allyTeam).armor += 3;
@@ -17,6 +23,14 @@ public class Cliric extends Mage{
         this.currentResource -= heal;
         System.out.printf("%s исцеляет раны %s на %d\n", this.name, target.name, this.currentResource/2);
     }
+    @Override
+    public void useAccessory(BaseClass target) {
+        target.alive = true;
+        target.currentHp = 1;
+        System.out.printf("%s  использует %s, и воскрешает %s\n",
+                this.name, this.accessory, target.name);
+    }
+
 
     protected BaseClass findNearestWounded(ArrayList<BaseClass> team) {
         BaseClass nearestWounded = team.get(0);
@@ -28,6 +42,14 @@ public class Cliric extends Mage{
             }
         }
         return nearestWounded;
+    }
+    protected BaseClass findDead(ArrayList<BaseClass> team){
+        BaseClass dead = null;
+        for(BaseClass person : team){
+            if (!person.alive && this.location.getDistance(person.location) < this.distance){
+                dead = person;
+            }
+        }return dead;
     }
     public Cliric(){
         super();
