@@ -69,17 +69,7 @@ public abstract class BaseClass implements InGameInterface {
         System.out.printf("%s оглядывается и замечает %s на расстоянии %d\n", this.name, nearestFoe.toString(),
                 location.getDistanceTo(nearestFoe.getCoordinates()));
     }
-//    public boolean findPeasant(ArrayList<BaseClass> team) {
-//        boolean result = false;
-//        for (BaseClass person : team) {
-//            if (person.type.equals("Холоп") && person.free) {
-//                person.free = false;
-//                result = true;
-//                break;
-//            }
-//        }
-//        return result;
-//    }
+
     /**
      * Вычисляет средний урон
      *
