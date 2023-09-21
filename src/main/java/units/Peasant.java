@@ -27,6 +27,8 @@ public class Peasant extends Melee{
 
     @Override
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
+        if(!this.alive) return;
+        if (this.currentHp <= 3 && !this.usedAccessory) useAccessory(this);
         if(!this.free) this.free = true;
     }
 
@@ -36,5 +38,6 @@ public class Peasant extends Melee{
         System.out.println(this.name + " использует " + this.accessory
                 + " и увеличивает своё здоровье на "+effect);
         this.health = this.health+effect;
+        this.usedAccessory = true;
     }
 }

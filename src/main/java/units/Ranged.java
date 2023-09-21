@@ -14,7 +14,7 @@ public abstract class Ranged extends BaseClass{
     public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
         if(!this.alive || this.currentResource <= 0) return;
         BaseClass target = this.findNearest(enemyTeam);
-        if (this.location.getDistance(target.location) < 3) {
+        if (this.location.getDistanceTo(target.location) < 3) {
             this.useAccessory(this);
             return;
         }
@@ -48,7 +48,7 @@ public abstract class Ranged extends BaseClass{
         if (!target.dodge() && this.isInRange(target)){
             int damage = (this.getAverageDamage(this.attack) - target.armor/3);
             if(this.isCritical()) {
-                damage *= 1.15;
+                damage *= (int) 1.15;
                 System.out.printf("%s(%s) атакует %s, и наносит %d критического урона.\n",
                         this.name, this.type.charAt(0), target.name, damage);
                 target.currentHp -= damage;

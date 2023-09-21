@@ -1,6 +1,8 @@
 package units;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Rogue extends Melee{
@@ -10,6 +12,26 @@ public class Rogue extends Melee{
         int chance = new Random().nextInt(0, 100)+(dodgeMultiplier^2);
         return chance > 75;
     }
+    @Override
+    public void takeTurn(ArrayList<BaseClass> enemyTeam, ArrayList<BaseClass> allyTeam) {
+        if(!this.alive) return;
+        BaseClass target = this.findNearest(enemyTeam);
+        if(!this.isInRange(target)&& !usedAccessory &&
+                this.location.getDistanceTo(target.location) < 5){
+            useAccessory(target);
+            return;
+        }
+        if(!this.isInRange(target)) {
+            Location setback = this.location;
+            this.location.moveTowards(target);
+            System.out.printf("%s движется в сторону %s.\n", this.name, target.name);
+            if(this.location.isTaken(allyTeam)) this.location = setback;
+        }
+        else {
+            this.attack(target);
+        }
+
+    }
 
     @Override
     public void useAccessory(@NotNull BaseClass target){
@@ -17,6 +39,7 @@ public class Rogue extends Melee{
         System.out.println(this.name + " бросает " + this.accessory + ", и наносит "
                 + target.name +" "+ damage + " урона.");
         target.health = target.health-damage;
+        this.usedAccessory = true;
     }
     public Rogue(){
         super();

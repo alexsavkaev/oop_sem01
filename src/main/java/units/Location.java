@@ -50,7 +50,7 @@ public class Location {
      * @param targetPosition координаты цели
      * @return int расстояние
      */
-    public int getDistance(Location targetPosition) {
+    public int getDistanceTo(Location targetPosition) {
         return (int) Math.sqrt(Math.pow(this.x - targetPosition.getPosition()[0], 2) + Math.pow(this.y - targetPosition.getPosition()[1], 2));
     }
 }

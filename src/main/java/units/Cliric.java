@@ -8,7 +8,6 @@ public class Cliric extends Mage{
         BaseClass dead = findDead(allyTeam);
         if (dead != null && !this.usedAccessory){
             useAccessory(dead);
-            this.usedAccessory = true;
             return;
         }
         BaseClass target = this.findNearestWounded(allyTeam);
@@ -29,6 +28,7 @@ public class Cliric extends Mage{
         target.currentHp = 1;
         System.out.printf("%s  использует %s, и воскрешает %s\n",
                 this.name, this.accessory, target.name);
+        this.usedAccessory = true;
     }
 
 
@@ -36,7 +36,7 @@ public class Cliric extends Mage{
         BaseClass nearestWounded = team.get(0);
         for (BaseClass person : team) {
             if (person.visible && person.alive && person.isWounded()) {
-                if (location.getDistance(person.getCoordinates()) < location.getDistance(nearestWounded.getCoordinates())) {
+                if (location.getDistanceTo(person.getCoordinates()) < location.getDistanceTo(nearestWounded.getCoordinates())) {
                     nearestWounded = person;
                 }
             }
@@ -46,7 +46,7 @@ public class Cliric extends Mage{
     protected BaseClass findDead(ArrayList<BaseClass> team){
         BaseClass dead = null;
         for(BaseClass person : team){
-            if (!person.alive && this.location.getDistance(person.location) < this.distance){
+            if (!person.alive && this.location.getDistanceTo(person.location) < this.distance){
                 dead = person;
             }
         }return dead;

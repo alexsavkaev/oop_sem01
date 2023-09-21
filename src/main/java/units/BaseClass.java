@@ -36,7 +36,7 @@ public abstract class BaseClass implements InGameInterface {
         }
     }
     public boolean isInRange(BaseClass target) {
-        return this.location.getDistance(target.location) < this.distance;
+        return this.location.getDistanceTo(target.location) < this.distance;
     }
     public boolean dodge() {
         int chance = new Random().nextInt(0, 100) + this.agility;
@@ -67,7 +67,7 @@ public abstract class BaseClass implements InGameInterface {
     public void lookAround(ArrayList<BaseClass> team) {
         BaseClass nearestFoe = findNearest(team);
         System.out.printf("%s оглядывается и замечает %s на расстоянии %d\n", this.name, nearestFoe.toString(),
-                location.getDistance(nearestFoe.getCoordinates()));
+                location.getDistanceTo(nearestFoe.getCoordinates()));
     }
 //    public boolean findPeasant(ArrayList<BaseClass> team) {
 //        boolean result = false;
@@ -100,7 +100,7 @@ public abstract class BaseClass implements InGameInterface {
         BaseClass nearest = team.get(0);
         for (BaseClass person : team) {
             if (person.visible && person.alive) {
-                if (location.getDistance(person.getCoordinates()) < location.getDistance(nearest.getCoordinates())) {
+                if (location.getDistanceTo(person.getCoordinates()) < location.getDistanceTo(nearest.getCoordinates())) {
                     if(!person.equals(this)){
                     nearest = person;
                     }
