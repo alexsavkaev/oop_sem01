@@ -11,7 +11,6 @@ public class Monk extends Melee{
         BaseClass target = this.findNearest(enemyTeam);
         if(this.currentHp < this.health/2 && !this.usedAccessory){
             useAccessory(this);
-            this.usedAccessory = true;
         }
         if(!this.isInRange(target)) {
             Location setback = this.location;
@@ -28,7 +27,6 @@ public class Monk extends Melee{
 
     @Override
     public void useAccessory(BaseClass target){
-        if(!this.usedAccessory) {
             System.out.println(this.name + " использует " + this.accessory +
                     " и увеличивает свои характеристики на " + statsMultiplier);
             this.armor = this.armor + statsMultiplier;
@@ -38,7 +36,6 @@ public class Monk extends Melee{
             this.currentHp = this.currentHp + statsMultiplier;
             if (this.currentHp > this.health) this.currentHp = this.health;
             this.usedAccessory = true;
-        }
     }
     @Override
     public boolean dodge(){
